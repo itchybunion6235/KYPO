@@ -1,0 +1,52 @@
+---
+# Main user ansible playbook.
+# Write your custom configuration here:
+
+- name: Hello world
+  hosts: all
+  tasks:
+
+    - name: print hello world
+      debug:
+        msg: "Hello World"
+
+# Installation and configuration of each host
+- name: Configuring devices separately
+  hosts: hosts
+  become: yes
+  tasks:
+  - name: include role
+    include_role:
+      name: "{{ inventory_hostname }}"
+      
+- hosts: attacker
+  become: true
+  tasks:
+    - name: Set DNS server on attacker
+      lineinfile:
+        path: /etc/resolv.conf
+        line: "nameserver 8.8.8.8"
+    - name: Add apt signing key
+      apt_key:
+        url: https://archive.kali.org/archive-key.asc
+        state: present
+    - name: Install teamviewer
+      apt:
+        deb: https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+
+- hosts: defender
+  become: true
+  tasks:
+    - name: Set DNS server on defender
+      lineinfile:
+        path: /etc/resolv.conf
+        line: "nameserver 8.8.8.8"
+    - name: Add apt signing key
+      apt_key:
+        url: https://archive.kali.org/archive-key.asc
+        state: present
+    - name: Install teamviewer
+      apt:
+        deb: https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+
+
