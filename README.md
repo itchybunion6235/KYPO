@@ -1,0 +1,1 @@
+This github page contains all resources neede to deploy my project excluding vagrant box which can be downloaded from the vagrant cloud.

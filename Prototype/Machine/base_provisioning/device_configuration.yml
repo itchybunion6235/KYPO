@@ -1,0 +1,41 @@
+---
+# Basic configuration of all defined devices
+
+- name: Including variables
+  hosts: all
+  tasks:
+
+  - name: Including common variables
+    include_vars:
+      file: config.yml
+      name: config
+
+- name: Configuring routers
+  hosts: routers
+  become: yes
+  tasks:
+  - name: include role
+    include_role:
+      name: routers
+    when: config.routers
+
+- name: Configuring Linux devices separately
+  hosts: all:!windows
+  become: yes
+  tasks:
+  - name: include role
+    include_role:
+      name: "{{ inventory_hostname }}"
+
+- name: Configuring Windows devices separately
+  hosts: windows
+  become: yes
+  become_method: runas
+  become_user: windows
+  vars:
+    ansible_become_pass: vagrant
+  tasks:
+  - name: include role
+    include_role:
+      name: "{{ inventory_hostname }}"
+...

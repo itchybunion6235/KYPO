@@ -1,0 +1,53 @@
+# Topology with one router connecting 2 separate networks, each with 1 host
+name: 3-networks
+hosts:
+  - name: server
+    base_box:
+      image: FIIT_DP/vuln_server
+    flavor: csirtmu.tiny1x2
+
+  - name: defender
+    base_box:
+      image: munikypo/kali-2020.4
+    flavor: csirtmu.tiny1x2
+
+  - name: attacker
+    base_box:
+      image: munikypo/kali-2020.4
+    flavor: csirtmu.tiny1x2
+
+routers:
+  - name: router
+
+networks:
+  - name: server-switch
+    cidr: 10.10.20.0/24
+
+  - name: defender-switch
+    cidr: 10.10.30.0/24
+
+  - name: attacker-switch
+    cidr: 10.10.40.0/24
+
+net_mappings:
+    - host: server
+      network: server-switch
+      ip: 10.10.20.5
+    - host: defender
+      network: defender-switch
+      ip: 10.10.30.5
+    - host: attacker
+      network: attacker-switch
+      ip: 10.10.40.5
+
+router_mappings:
+    - router: router
+      network: server-switch
+      ip: 10.10.20.1
+    - router: router
+      network: defender-switch
+      ip: 10.10.30.1
+    - router: router
+      network: attacker-switch
+      ip: 10.10.40.1
+

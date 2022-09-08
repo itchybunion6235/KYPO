@@ -1,0 +1,25 @@
+---
+- name: Install net-tools
+  apt:
+    name: "net-tools"
+
+- name: Adding aliases
+  loop: "{{ aliases | dict2items }}"
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ item.value }} {{ item.key }}"
+
+- name: Configuring routes
+  include_role:
+    name: interface
+  vars:
+    interface_configuration_type: static
+    interface_identification: "{{ interface.interface_ip }}"
+    interface_static_ip: "{{ interface.interface_ip }}"
+    interface_static_netmask: "{{ interface.interface_netmask }}"
+    interface_default_gateway: "{{ interface.interface_default_gateway | default('') }}"
+    interface_routes: "{{ interface.interface_routes | default([]) }}"
+  loop: "{{ routes }}"
+  loop_control:
+    loop_var: interface
+...

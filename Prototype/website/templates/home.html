@@ -1,0 +1,464 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Flag submission</h1>
+<!--<ul class="list-group list-group-flush" id="notes">
+      {% for flag in user.flags %}
+      <li class="list-group-item">
+        {{ flag.data }}
+        <button type="button" class="close" onClick="deleteNote({{ flag.id }})">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+      {% endfor %}
+    </ul>-->
+<form method="POST">
+  <textarea name="flag" id="flag" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary" name="owasp" value="0">Submit Flag</button>
+  </div>
+</form>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="category-header col-md-12 mb-3">
+      <h3>OWASP Top 10</h3>
+    </div>
+    <form method="POST">
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal1"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="1">
+          <p>Broken Access Control</p>
+        </button>
+        <div id="myModal1" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/">
+                  <h5 class="modal-title">Broken Access Control</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Access control enforces policy such that users cannot act outside of their intended permissions.
+                  Failures typically lead to unauthorized information disclosure, modification, or destruction of all
+                  data or performing a business function outside the user's limits. Common access control
+                  vulnerabilities include:
+                <ul>
+                  <li>
+                    Bypassing access control checks by modifying the URL (parameter tampering or force browsing),
+                    internal application state, or the HTML page, or by using an attack tool modifying API requests.
+                  </li>
+                  <li>
+                    Elevation of privilege. Acting as a user without being logged in or acting as an admin when logged
+                    in as a user.
+                  </li>
+                </ul>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal2"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="2">
+          <p>Cryptographic Failures</p>
+        </button>
+        <div id="myModal2" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">
+                  <h5 class="modal-title">Cryptographic Failures</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  The first thing is to determine the protection needs of data in transit and at rest. For example,
+                  passwords, credit card numbers, health records, personal information, and business secrets require
+                  extra protection, mainly if that data falls under privacy laws, e.g., EU's General Data Protection
+                  Regulation (GDPR), or regulations, e.g., financial data protection such as PCI Data Security Standard
+                  (PCI DSS). For all such data:
+                <ul>
+                  <li>
+                    Are any old or weak cryptographic algorithms or protocols used either by default or in older code?
+                  </li>
+                  <li>
+                    Are deprecated hash functions such as MD5 or SHA1 in use, or are non-cryptographic hash functions
+                    used when cryptographic hash functions are needed?
+                  </li>
+                </ul>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal3"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="3">
+          <p>Injection</p>
+        </button>
+        <div id="myModal3" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A03_2021-Injection/">
+                  <h5 class="modal-title">Injection</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Some of the more common injections are SQL, NoSQL, OS command, Object Relational Mapping (ORM), LDAP,
+                  and Expression Language (EL) or Object Graph Navigation Library (OGNL) injection. The concept is
+                  identical among all interpreters. Source code review is the best method of detecting if applications
+                  are vulnerable to injections. Automated testing of all parameters, headers, URL, cookies, JSON, SOAP,
+                  and XML data inputs is strongly encouraged. Organizations can include static (SAST), dynamic (DAST),
+                  and interactive (IAST) application security testing tools into the CI/CD pipeline to identify
+                  introduced injection flaws before production deployment.
+                  An application is vulnerable to attack when:
+                <ul>
+                  <li>
+                    User-supplied data is not validated, filtered, or sanitized by the application.
+                  </li>
+                  <li>
+                    Dynamic queries or non-parameterized calls without context-aware escaping are used directly in the
+                    interpreter.
+                  </li>
+                  <li>
+                    Hostile data is directly used or concatenated. The SQL or command contains the structure and
+                    malicious data in dynamic queries, commands, or stored procedures.
+                  </li>
+                </ul>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal4"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="4">
+          <p>Insecure Design</p>
+        </button>
+        <div id="myModal4" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">
+                  <h5 class="modal-title">Insecure Design</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Insecure design is a broad category representing different weaknesses, expressed as “missing or
+                  ineffective control design.” Insecure design is not the source for all other Top 10 risk categories.
+                  There is a difference between insecure design and insecure implementation. We differentiate between
+                  design flaws and implementation defects for a reason, they have different root causes and remediation.
+                  A secure design can still have implementation defects leading to vulnerabilities that may be
+                  exploited. An insecure design cannot be fixed by a perfect implementation as by definition, needed
+                  security controls were never created to defend against specific attacks. One of the factors that
+                  contribute to insecure design is the lack of business risk profiling inherent in the software or
+                  system being developed, and thus the failure to determine what level of security design is required.
+                </p>
+              </div>
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal5"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="5">
+          <p>Security Misconfiguration</p>
+        </button>
+        <div id="myModal5" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">
+                  <h5 class="modal-title">Security Misconfiguration</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>The application might be vulnerable if the application is:
+                <ul>
+                  <li> Missing appropriate security hardening across any part of the application stack or improperly
+                    configured permissions on cloud services.
+                  </li>
+                  <li>
+                    Unnecessary features are enabled or installed (e.g., unnecessary ports, services, pages, accounts,
+                    or privileges).
+                  </li>
+                  <li> Default accounts and their passwords are still enabled and unchanged.
+                  </li>
+                  <li> Error handling reveals stack traces or other overly informative error messages to users.
+                  </li>
+                  <li> For upgraded systems, the latest security features are disabled or not configured securely.
+                  </li>
+                  <li> The security settings in the application servers, application frameworks (e.g., Struts, Spring,
+                    ASP.NET), libraries, databases, etc., are not set to secure values.
+                  </li>
+                  <li> The server does not send security headers or directives, or they are not set to secure values.
+                  </li>
+
+                  Without a concerted, repeatable application security configuration process, systems are at a higher
+                  risk.</p>
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal6"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="6">
+          <p>Vulnerable and Outdated Components</p>
+        </button>
+        <div id="myModal6" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/">
+                  <h5 class="modal-title">Vulnerable and Outdated Components</h5>
+                </a> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  If you do not know the versions of all components you use (both client-side and server-side). This
+                  includes components you directly use as well as nested dependencies.
+                <ul>
+                  <li>If the software is vulnerable, unsupported, or out of date. This includes the OS, web/application
+                    server, database management system (DBMS), applications, APIs and all components, runtime
+                    environments, and libraries.
+                  </li>
+                  <li>If you do not scan for vulnerabilities regularly and subscribe to security bulletins related to
+                    the components you use.
+                  </li>
+                  <li>If you do not fix or upgrade the underlying platform, frameworks, and dependencies in a
+                    risk-based, timely fashion. This commonly happens in environments when patching is a monthly or
+                    quarterly task under change control, leaving organizations open to days or months of unnecessary
+                    exposure to fixed vulnerabilities.
+                  </li>
+                  <li>If software developers do not test the compatibility of updated, upgraded, or patched libraries.
+                  </li>
+                  <li>If you do not secure the components’ configurations
+                  </li>
+
+                </ul>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal7"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="7">
+          <p>Identification and Authentication Failures</p>
+        </button>
+        <div id="myModal7" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/">
+                  <h5 class="modal-title">Identification and Authentication Failures</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  Confirmation of the user's identity, authentication, and session management is critical to protect
+                  against authentication-related attacks. There may be authentication weaknesses if the application:
+                <ul>
+                  <li>Permits automated attacks such as credential stuffing, where the attacker has a list of valid
+                    usernames and passwords.
+                  </li>
+                  <li>Permits brute force or other automated attacks.
+                  </li>
+                  <li>Permits default, weak, or well-known passwords, such as "Password1" or "admin/admin".
+                  </li>
+                  <li>Uses weak or ineffective credential recovery and forgot-password processes, such as
+                    "knowledge-based answers," which cannot be made safe.
+                  </li>
+                  <li>Uses plain text, encrypted, or weakly hashed passwords data stores.
+                  </li>
+                  <li>Has missing or ineffective multi-factor authentication.
+                  </li>
+                  <li>Exposes session identifier in the URL.
+                  </li>
+                  <li>
+                    Reuse session identifier after successful login.
+                  </li>
+                  <li>
+                    Does not correctly invalidate Session IDs. User sessions or authentication tokens (mainly single
+                    sign-on (SSO) tokens) aren't properly invalidated during logout or a period of inactivity.
+                  </li>
+                </ul>></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal8"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="8">
+          <p>Software and Data Integrity Failures</p>
+        </button>
+        <div id="myModal8" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/">
+                  <h5 class="modal-title">Software and Data Integrity Failures</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Software and data integrity failures relate to code and infrastructure that does not protect against
+                  integrity violations. An example of this is where an application relies upon plugins, libraries, or
+                  modules from untrusted sources, repositories, and content delivery networks (CDNs). An insecure CI/CD
+                  pipeline can introduce the potential for unauthorized access, malicious code, or system compromise.
+                  Lastly, many applications now include auto-update functionality, where updates are downloaded without
+                  sufficient integrity verification and applied to the previously trusted application. Attackers could
+                  potentially upload their own updates to be distributed and run on all installations. Another example
+                  is where objects or data are encoded or serialized into a structure that an attacker can see and
+                  modify is vulnerable to insecure deserialization.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal9"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="9">
+          <p>Security Logging and Monitoring Failures</p>
+        </button>
+        <div id="myModal9" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/">
+                  <h5 class="modal-title">Security Logging and Monitoring Failures</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  Returning to the OWASP Top 10 2021, this category is to help detect, escalate, and respond to active
+                  breaches. Without logging and monitoring, breaches cannot be detected. Insufficient logging,
+                  detection, monitoring, and active response occurs any time:
+                <ul>
+                  <li>Auditable events, such as logins, failed logins, and high-value transactions, are not logged.
+                  </li>
+                  <li>Warnings and errors generate no, inadequate, or unclear log messages.
+                  </li>
+                  <li>Logs of applications and APIs are not monitored for suspicious activity.
+                  </li>
+                  <li>Logs are only stored locally.
+                  </li>
+                  <li>Appropriate alerting thresholds and response escalation processes are not in place or effective.
+                  </li>
+                  <li>Penetration testing and scans by dynamic application security testing (DAST) tools (such as OWASP
+                    ZAP) do not trigger alerts.
+                  </li>
+                  <li>The application cannot detect, escalate, or alert for active attacks in real-time or near
+                    real-time.
+                  </li>
+
+                  You are vulnerable to information leakage by making logging and alerting events visible to a user or
+                  an attacker.
+                </ul>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-inline-block">
+        <button id="owasptop" type="button" data-toggle="modal" data-target="#myModal10"
+          class="btn btn-dark challenge-button w-100 text-truncate pt-3 pb-3 mb-2" name="owasp" value="10">
+          <p>Server Side Request Forgery</p>
+        </button>
+        <div id="myModal10" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <a href="https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/">
+                  <h5 class="modal-title">Server Side Request Forgery</h5>
+                </a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>SSRF flaws occur whenever a web application is fetching a remote resource without validating the user-supplied URL. It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall, VPN, or another type of network access control list (ACL).
+                  <p>&nbsp;</p>
+                  As modern web applications provide end-users with convenient features, fetching a URL becomes a common scenario. As a result, the incidence of SSRF is increasing. Also, the severity of SSRF is becoming higher due to cloud services and the complexity of architectures.
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

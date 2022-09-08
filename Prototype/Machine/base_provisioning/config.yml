@@ -1,0 +1,17 @@
+hosts:
+  - name: server
+  - networks:
+    server-switch: 10.10.20.5
+  - name: defender
+  - networks:
+    defender-switch: 10.10.30.5
+  - name: attacker
+  - networks:
+    attacker-switch: 10.10.40.5
+
+routers:
+  - name: router
+  - networks:
+    server-switch: 10.10.20.1
+    defender-switch: 10.10.30.1
+    attacker-switch: 10.10.40.1

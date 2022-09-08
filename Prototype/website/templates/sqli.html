@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}SQL Injection{% endblock %} 
+{% block content %}
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">{{ text }}</p>
+    </div>
+</div>
+{% if redir %}
+<script>    
+    window.setTimeout(function(){
+      window.location.href = "{{url_for('views.home')}}";}, 5000);
+</script>
+{% endif %}
+{% endblock %}
